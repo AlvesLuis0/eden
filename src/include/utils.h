@@ -6,7 +6,6 @@ static inline double SIGMOID(double x);
 
 #endif // UTILS_H_
 
-
 #ifdef UTILS_IMPLEMENTATION
 
 #include <stdlib.h>

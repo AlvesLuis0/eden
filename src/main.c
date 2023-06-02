@@ -5,14 +5,25 @@
 #define PERCEPTRON_IMPLEMENTATION
 #include "include/perceptron.h"
 
+double inputs[][2] = {
+	{ 0, 0 },
+	{ 0, 1 },
+	{ 1, 0 },
+	{ 1, 1 }
+};
+
+double targets[] = {
+	0, 1, 1, 1
+};
+
 int main() {
 	srand(time(NULL));
 
 	Perceptron p = PerceptronCreate(2);
-	double inputs[] = { 1, 0 };
-	double output = PerceptronFeedforward(p, inputs);
+	double output = PerceptronFeedforward(p, inputs[1]);
+	double cost = PerceptronCost(p, inputs[1], 1);
 
-	printf("input 1: %d\ninput 2: %d\noutput: %lf\nexpected: %d\nerror: %lf\n", 1, 0, output, 1, 1 - output);
+	printf("output: %lf\nexpected: %d\ncost: %lf\n", output, 1, cost);
 
 	return 0;
 }
