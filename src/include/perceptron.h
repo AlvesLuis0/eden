@@ -6,14 +6,14 @@ typedef long unsigned int size;
 
 // estrutura do perceptron
 typedef struct {
-	const size weightsLength;
+	const size weightsSize;
 	double bias;
 	double *weights;
 } Perceptron;
 
-Perceptron PerceptronCreate(size weightsLength);
+Perceptron PerceptronCreate(size weightsSize);
 double PerceptronFeedforward(Perceptron p, double *inputs);
-static inline double PerceptronCost(Perceptron p, double *inputs, double expected);
+void PerceptronTrain(Perceptron *p, double **inputs, double *expects, size samplesSize, size epoch, double learningRate);
 
 #endif // PERCEPTRON_H_
 
@@ -23,16 +23,16 @@ static inline double PerceptronCost(Perceptron p, double *inputs, double expecte
 #include "utils.h"
 
 // criando perceptron
-Perceptron PerceptronCreate(size weightsLength) {
-	double weights[weightsLength];
+Perceptron PerceptronCreate(size weightsSize) {
+	double weights[weightsSize];
 
 	Perceptron p = {
 		.weights = weights,
 		.bias = RAND(1.5),
-		.weightsLength = weightsLength
+		.weightsSize = weightsSize
 	};
 
-	for(size i = 0; i < weightsLength; i++)
+	for(size i = 0; i < weightsSize; i++)
 		p.weights[i] = RAND(1.5);
 
 	return p;
@@ -42,15 +42,34 @@ Perceptron PerceptronCreate(size weightsLength) {
 double PerceptronFeedforward(Perceptron p, double *inputs) {
 	double sum = 0;
 
-	for(size i = 0; i < p.weightsLength; i++)
+	for(size i = 0; i < p.weightsSize; i++)
 		sum += p.weights[i] * inputs[i];
 	
 	return SIGMOID(sum + p.bias);
 }
 
 // treinando o perceptron
-static inline double PerceptronCost(Perceptron p, double *inputs, double expected) {
-	return PerceptronFeedforward(p, inputs) - expected;
+void PerceptronTrain(Perceptron *p, double **inputs, double *expects, size samplesSize, size epoch, double learningRate) {
+	// double output;
+	// double error;
+
+	// for(; epoch > 0; epoch--) {
+	// 	for(size i = 0; i < samplesSize; i++) {
+	// 		output = PerceptronFeedforward(*p, inputs[i]);
+	// 		error = output - expects[i];
+
+	// 		for(size j = 0; j < p->weightsSize; j++)
+	// 			p->weights[j] += learningRate * error * inputs[i][j];
+			
+	// 		p->bias += learningRate * error;
+	// 	}
+	// }
+
+	for(size i = 0; i < samplesSize; i++) {
+		for (size j = 0; j < p->weightsSize; j++)
+			printf("%lf ", inputs[i][j]);
+		puts("");
+	}
 }
 
 #endif // PERCEPTRON_IMPLEMENTATION

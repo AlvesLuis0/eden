@@ -5,25 +5,33 @@
 #define PERCEPTRON_IMPLEMENTATION
 #include "include/perceptron.h"
 
-double inputs[][2] = {
-	{ 0, 0 },
-	{ 0, 1 },
-	{ 1, 0 },
-	{ 1, 1 }
-};
+#define EPOCH 1000
+#define LEARNING_RATE 1.5
+#define ROWS 4
+#define COLUMNS 2
 
-double targets[] = {
-	0, 1, 1, 1
-};
+void showOR(Perceptron p, double *inputs, double expects) {
+	double output = PerceptronFeedforward(p, inputs);
+	double error = output - expects;
+
+	printf("%.2lf | %.2lf = %.2lf\n", inputs[0], inputs[1], PerceptronFeedforward(p, inputs));
+	printf("expects: %.2lf\nerror: %.2lf\n", expects, error);
+}
 
 int main() {
 	srand(time(NULL));
 
-	Perceptron p = PerceptronCreate(2);
-	double output = PerceptronFeedforward(p, inputs[1]);
-	double cost = PerceptronCost(p, inputs[1], 1);
+	Perceptron p = PerceptronCreate(COLUMNS);
+	double **inputs = malloc(sizeof(double*) * ROWS);
+	double expects[ROWS] = { 0, 1, 1, 1 };
 
-	printf("output: %lf\nexpected: %d\ncost: %lf\n", output, 1, cost);
+	// criando tabela OR
+	for(size i = 0; i < ROWS; i++)
+		inputs[i] = malloc(sizeof(double) * COLUMNS);
+
+	// showOR(p, inputs[1], expects[1]);
+
+	PerceptronTrain(&p, inputs, expects, ROWS, EPOCH, LEARNING_RATE);
 
 	return 0;
 }
