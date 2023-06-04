@@ -13,21 +13,22 @@ typedef struct {
 
 Perceptron PerceptronCreate(size weightsSize);
 double PerceptronFeedforward(Perceptron p, double *inputs);
-void PerceptronTrain(Perceptron *p, double **inputs, double *expects, size samplesSize, size epoch, double learningRate);
+double PerceptronTrain(Perceptron *p, double *inputs, double expects, double learningRate);
+void PerceptronDelete(Perceptron p);
 
 #endif // PERCEPTRON_H_
 
 #ifdef PERCEPTRON_IMPLEMENTATION
+
+#include <stdlib.h>
 
 #define UTILS_IMPLEMENTATION
 #include "utils.h"
 
 // criando perceptron
 Perceptron PerceptronCreate(size weightsSize) {
-	double weights[weightsSize];
-
 	Perceptron p = {
-		.weights = weights,
+		.weights = malloc(sizeof(double) * weightsSize),
 		.bias = RAND(1.5),
 		.weightsSize = weightsSize
 	};
@@ -49,27 +50,20 @@ double PerceptronFeedforward(Perceptron p, double *inputs) {
 }
 
 // treinando o perceptron
-void PerceptronTrain(Perceptron *p, double **inputs, double *expects, size samplesSize, size epoch, double learningRate) {
-	// double output;
-	// double error;
+double PerceptronTrain(Perceptron *p, double *inputs, double expects, double learningRate) {
+	double output = PerceptronFeedforward(*p, inputs);
+	double error = expects - output;
 
-	// for(; epoch > 0; epoch--) {
-	// 	for(size i = 0; i < samplesSize; i++) {
-	// 		output = PerceptronFeedforward(*p, inputs[i]);
-	// 		error = output - expects[i];
+	for(size i = 0; i < p->weightsSize; i++)
+		p->weights[i] += learningRate * error * inputs[i];
+	
+	p->bias += learningRate * error;
 
-	// 		for(size j = 0; j < p->weightsSize; j++)
-	// 			p->weights[j] += learningRate * error * inputs[i][j];
-			
-	// 		p->bias += learningRate * error;
-	// 	}
-	// }
+	return error;
+}
 
-	for(size i = 0; i < samplesSize; i++) {
-		for (size j = 0; j < p->weightsSize; j++)
-			printf("%lf ", inputs[i][j]);
-		puts("");
-	}
+void PerceptronDelete(Perceptron p) {
+	free(p.weights);
 }
 
 #endif // PERCEPTRON_IMPLEMENTATION
