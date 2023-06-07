@@ -9,7 +9,7 @@ int main() {
   srand(time(NULL));
 
   Layer layer = LayerCreate(2, 2);
-  printf("bias: %lf\namount of neurons: %ld\n", layer.bias, layer.layerLength);
+  LayerPrint(layer, 2);
 
   return 0;
 }
