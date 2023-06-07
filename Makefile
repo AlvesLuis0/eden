@@ -1,5 +1,5 @@
 # variáveis de personalização
-FILENAME=neural-network
+FILENAME=test
 INPUT_DIR=src
 OUTPUT_DIR=build
 LOG_DIR=log

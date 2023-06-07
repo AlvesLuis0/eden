@@ -1,4 +1,5 @@
 build/
 plot/
 log/
+test.*
 .vscode/
