@@ -13,6 +13,7 @@ typedef struct {
 
 Layer LayerCreate(size_t layerLength, size_t previousLayerLength);
 void LayerPrint(Layer layer, size_t previowsLayerLength);
+void LayerDelete(Layer layer);
 
 #endif // NEURAL_NETWORK_H_
 
@@ -42,12 +43,21 @@ Layer LayerCreate(size_t layerLength, size_t previousLayerLength) {
   return model;
 }
 
+// printando os valores da camada
 void LayerPrint(Layer layer, size_t previowsLayerLength) {
 	printf("bias: %lf\namount of neurons: %ld\n", layer.bias, layer.layerLength);
 
   for(size_t i = 0; i < layer.layerLength; i++)
     for(size_t j = 0; j < previowsLayerLength; j++)
       printf("weight[%ld][%ld]: %lf\n", i, j, layer.weights[i][j]);
+}
+
+// liberando memória alocada para a matriz de pesos da camada
+void LayerDelete(Layer layer) {
+  for(size_t i = 0; i < layer.layerLength; i++)
+    free(layer.weights[i]);
+  
+  free(layer.weights);
 }
 
 #endif // NEURAL_NETWORK_IMPLEMENTATION
