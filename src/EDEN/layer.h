@@ -6,13 +6,15 @@ typedef long unsigned int size_t;
 
 // estrutura da camada
 typedef struct {
-  const size_t layerLength;
+  const size_t neuronsLength;
   double bias;
   double **weights;
 } Layer;
 
-Layer LayerCreate(size_t layerLength, size_t previousLayerLength);
-void LayerPrint(Layer layer, size_t previowsLayerLength);
+#define LayerPrint(layer, previowsNeuronsLength) __LayerPrint(layer, previowsNeuronsLength, #layer) 
+
+Layer LayerCreate(size_t neuronsLength, size_t previousNeuronsLength);
+void __LayerPrint(Layer layer, size_t previowsNeuronsLength, char *label);
 void LayerDelete(Layer layer);
 
 #endif // LAYER_H_
@@ -26,17 +28,17 @@ void LayerDelete(Layer layer);
 #include "utils.h"
 
 // criando camada
-Layer LayerCreate(size_t layerLength, size_t previousLayerLength) {
+Layer LayerCreate(size_t neuronsLength, size_t previousNeuronsLength) {
   Layer model = {
-    .layerLength = layerLength,
+    .neuronsLength = neuronsLength,
     .bias = RAND(1.5),
-    .weights = malloc(sizeof(double*) * layerLength)
+    .weights = malloc(sizeof(double*) * neuronsLength)
   };
 
-  for(size_t i = 0; i < layerLength; i++) {
-    model.weights[i] = malloc(sizeof(double) * previousLayerLength);
+  for(size_t i = 0; i < neuronsLength; i++) {
+    model.weights[i] = malloc(sizeof(double) * previousNeuronsLength);
 
-    for(size_t j = 0; j < previousLayerLength; j++)
+    for(size_t j = 0; j < previousNeuronsLength; j++)
       model.weights[i][j] = RAND(1.5);
   }
   
@@ -44,17 +46,24 @@ Layer LayerCreate(size_t layerLength, size_t previousLayerLength) {
 }
 
 // printando os valores da camada
-void LayerPrint(Layer layer, size_t previowsLayerLength) {
-	printf("bias: %lf\namount of neurons: %ld\n", layer.bias, layer.layerLength);
+void __LayerPrint(Layer layer, size_t previowsNeuronsLength, char *label) {
+	printf("Layer %s = {\n", label);
+	printf("\tdouble bias = %lf;\n\tsize_t neuronsLength = %ld;", layer.bias, layer.neuronsLength);
+  printf("\n\tdouble **weights = [");
 
-  for(size_t i = 0; i < layer.layerLength; i++)
-    for(size_t j = 0; j < previowsLayerLength; j++)
-      printf("weight[%ld][%ld]: %lf\n", i, j, layer.weights[i][j]);
+	for(size_t i = 0; i < layer.neuronsLength; i++) {
+    fputs("\n\t\t", stdout);
+
+    for(size_t j = 0; j < previowsNeuronsLength; j++)
+      printf("%lf ", layer.weights[i][j]);
+  }
+
+	puts("\n\t];\n};");
 }
 
 // liberando memória alocada para a matriz de pesos da camada
 void LayerDelete(Layer layer) {
-  for(size_t i = 0; i < layer.layerLength; i++)
+  for(size_t i = 0; i < layer.neuronsLength; i++)
     free(layer.weights[i]);
   
   free(layer.weights);
