@@ -1,5 +1,5 @@
 # variáveis de personalização
-FILENAME=perceptron
+FILENAME=neural-network
 INPUT_DIR=src
 OUTPUT_DIR=build
 LOG_DIR=log
