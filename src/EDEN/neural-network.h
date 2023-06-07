@@ -37,4 +37,11 @@ NeuralNetwork NeuralNetworkCreate(size_t *topology, size_t layersLength) {
   return model;
 }
 
+void NeuralNetworkDelete(NeuralNetwork model) {
+  for(size_t i = 0; i < model.layersLength - 1; i++)
+    LayerDelete(model.layers[i]);
+
+  free(model.layers);
+}
+
 #endif

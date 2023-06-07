@@ -8,8 +8,13 @@
 #define TOPOLOGY_LENGTH 3
 
 int main() {
+  // declarando a topologia (arquitetura) da rede neural
   size_t topology[TOPOLOGY_LENGTH] = { 2, 2, 1 };
 
+  // criando a prória
   NeuralNetwork model = NeuralNetworkCreate(topology, TOPOLOGY_LENGTH);
-  printf("%ld\n", model.layersLength);
+  LayerPrint(model.layers[0], topology[0]);
+
+  // liberando a memória alocada
+  NeuralNetworkDelete(model);
 }
