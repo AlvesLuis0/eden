@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define NEURAL_NETWORK_IMPLEMENTATION
-#include "EDEN/neural-network.h"
+#define LAYER_IMPLEMENTATION
+#include "EDEN/layer.h"
 
 int main() {
   srand(time(NULL));

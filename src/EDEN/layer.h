@@ -1,5 +1,5 @@
-#ifndef NEURAL_NETWORK_H_
-#define NEURAL_NETWORK_H_
+#ifndef LAYER_H_
+#define LAYER_H_
 
 // redefinição do tipo "tamanho"
 typedef long unsigned int size_t;
@@ -15,9 +15,9 @@ Layer LayerCreate(size_t layerLength, size_t previousLayerLength);
 void LayerPrint(Layer layer, size_t previowsLayerLength);
 void LayerDelete(Layer layer);
 
-#endif // NEURAL_NETWORK_H_
+#endif // LAYER_H_
 
-#ifdef NEURAL_NETWORK_IMPLEMENTATION
+#ifdef LAYER_IMPLEMENTATION
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,4 +60,4 @@ void LayerDelete(Layer layer) {
   free(layer.weights);
 }
 
-#endif // NEURAL_NETWORK_IMPLEMENTATION
+#endif // LAYER_IMPLEMENTATION

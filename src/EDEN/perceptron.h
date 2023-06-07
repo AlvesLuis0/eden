@@ -11,8 +11,10 @@ typedef struct {
 	double *weights;
 } Perceptron;
 
+#define PerceptronPrint(model) __PerceptronPrint(model, #model)
+
 Perceptron PerceptronCreate(size_t weightsLength);
-void PerceptronPrint(Perceptron model);
+void __PerceptronPrint(Perceptron model, char *label);
 double PerceptronPredict(Perceptron model, double *inputs);
 double PerceptronTrain(Perceptron *model, double *inputs, double expects, double learningRate);
 static inline void PerceptronDelete(Perceptron model);
@@ -41,11 +43,13 @@ Perceptron PerceptronCreate(size_t weightsLength) {
 	return model;
 }
 
-void PerceptronPrint(Perceptron model) {
-	printf("bias: %lf\namount of weights: %ld\n", model.bias, model.weightsLength);
+void __PerceptronPrint(Perceptron model, char *label) {
+	printf("Perceptron %s = {\n", label);
+	printf("\tdouble bias = %lf;\n\tsize_t weightsLength = %ld;\n\tdouble *weights = [\n\t\t", model.bias, model.weightsLength);
 
 	for(size_t i = 0; i < model.weightsLength; i++)
-		printf("weight[%ld]: %lf\n", i, model.weights[i]);
+		printf("%lf ", model.weights[i]);
+	puts("\n\t];\n};");
 }
 
 // calculando saída
