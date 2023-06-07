@@ -6,7 +6,7 @@ typedef long unsigned int size_t;
 
 // estrutura da camada
 typedef struct {
-  const size_t neuronsLength;
+  size_t neuronsLength;
   double bias;
   double **weights;
 } Layer;
