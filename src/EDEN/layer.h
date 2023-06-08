@@ -60,6 +60,11 @@ void __LayerPrint(Layer layer, size_t previowsNeuronsLength, char *label) {
       printf("%lf ", layer.weights[i][j]);
   }
 
+	fputs("\n\t];\n\tdouble *values = [\n\t\t", stdout);
+
+  for(size_t i = 0; i < previowsNeuronsLength; i++)
+    printf("%lf ", layer.values[i]);
+
 	puts("\n\t];\n};");
 }
 
@@ -79,6 +84,7 @@ void LayerDelete(Layer layer) {
     free(layer.weights[i]);
   
   free(layer.weights);
+  free(layer.values);
 }
 
 #endif // LAYER_IMPLEMENTATION
