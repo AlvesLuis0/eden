@@ -1,12 +1,21 @@
-#define LAYER_IMPLEMENTATION
-#include "EDEN/layer.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define NEURAL_NETWORK_IMPLEMENTATION
+#include "EDEN/neural-network.h"
+
+#define TOPOLOGY_LENGTH 3
 
 int main() {
-  Layer layer = LayerCreate(2, 2);
+  srand(time(NULL));
+  
+  size_t topology[TOPOLOGY_LENGTH] = { 3, 2, 1 };
+  NeuralNetwork neural = NeuralNetworkCreate(topology, TOPOLOGY_LENGTH);
 
-  LayerPrint(layer);
+  NeuralNetworkPrint(neural);
 
-  LayerDelete(layer);
+  NeuralNetworkDelete(neural);
 
   return 0;
 }

@@ -70,15 +70,6 @@ void __LayerPrint(Layer layer, char *label) {
 	puts("\n\t];\n};");
 }
 
-// liberando memória alocada dentro da camada
-void LayerDelete(Layer layer) {
-	for(size_t i = 0; i < layer.neuronsLength; i++)
-		free(layer.weights[i]);
-
-	free(layer.weights);
-	free(layer.values);
-}
-
 // realizando o cálculo de um neurônio da camada
 double LayerNeuronPredict(Layer layer, size_t neuronIndex, double *inputs) {
 	double sum = 0;
@@ -87,6 +78,15 @@ double LayerNeuronPredict(Layer layer, size_t neuronIndex, double *inputs) {
 		sum += layer.weights[neuronIndex][i] * inputs[i];
 
 	return layer.values[neuronIndex] = SIGMOID(sum + layer.bias);
+}
+
+// liberando memória alocada dentro da camada
+void LayerDelete(Layer layer) {
+	for(size_t i = 0; i < layer.neuronsLength; i++)
+		free(layer.weights[i]);
+
+	free(layer.weights);
+	free(layer.values);
 }
 
 #endif // LAYER_IMPLEMENTATION
