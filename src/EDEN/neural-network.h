@@ -13,7 +13,10 @@ typedef struct {
   Layer *layers;
 } NeuralNetwork;
 
+#define NeuralNetworkPrint(model) __NeuralNetworkPrint(model, #model)
+
 NeuralNetwork NeuralNetworkCreate(size_t *topology, size_t layersLength);
+void __NeuralNetworkPrint(NeuralNetwork model, char *label);
 
 #endif // NEURAL_NETWORK_H_
 
@@ -24,6 +27,7 @@ NeuralNetwork NeuralNetworkCreate(size_t *topology, size_t layersLength);
 #define LAYER_IMPLEMENTATION
 #include "layer.h"
 
+// criando a rede neural
 NeuralNetwork NeuralNetworkCreate(size_t *topology, size_t layersLength) {
   NeuralNetwork model = {
     .layersLength = layersLength,
@@ -37,6 +41,17 @@ NeuralNetwork NeuralNetworkCreate(size_t *topology, size_t layersLength) {
   return model;
 }
 
+// printando seus valores
+void __NeuralNetworkPrint(NeuralNetwork model, char *label) {
+  printf("========== %s ==========\n", label);
+
+  for(size_t i = 0; i < model.layersLength - 1; i++)
+    LayerPrint(model.layers[i], model.topology[i]);
+  
+  puts("----------------");
+}
+
+// liberando memória
 void NeuralNetworkDelete(NeuralNetwork model) {
   for(size_t i = 0; i < model.layersLength - 1; i++)
     LayerDelete(model.layers[i]);

@@ -13,7 +13,7 @@ int main() {
 
   // criando a prória
   NeuralNetwork model = NeuralNetworkCreate(topology, TOPOLOGY_LENGTH);
-  LayerPrint(model.layers[0], topology[0]);
+  NeuralNetworkPrint(model);
 
   // liberando a memória alocada
   NeuralNetworkDelete(model);

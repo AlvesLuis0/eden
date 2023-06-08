@@ -8,6 +8,7 @@ typedef long unsigned int size_t;
 typedef struct {
   size_t neuronsLength;
   double bias;
+  double *values;
   double **weights;
 } Layer;
 
@@ -32,7 +33,8 @@ Layer LayerCreate(size_t neuronsLength, size_t previousNeuronsLength) {
   Layer model = {
     .neuronsLength = neuronsLength,
     .bias = RAND(1.5),
-    .weights = malloc(sizeof(double*) * neuronsLength)
+    .weights = malloc(sizeof(double*) * neuronsLength),
+    .values = malloc(sizeof(double) * neuronsLength)
   };
 
   for(size_t i = 0; i < neuronsLength; i++) {
