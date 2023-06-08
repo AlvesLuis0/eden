@@ -51,6 +51,14 @@ void __NeuralNetworkPrint(NeuralNetwork model, char *label) {
   puts("----------------");
 }
 
+// prevendo um valor com base nas entradas
+double NeuralNetworkPredict(NeuralNetwork model, double *inputs) {
+  (void) model;
+  (void) inputs;
+
+  return 0;
+}
+
 // liberando memória
 void NeuralNetworkDelete(NeuralNetwork model) {
   for(size_t i = 0; i < model.layersLength - 1; i++)
