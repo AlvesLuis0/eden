@@ -79,4 +79,14 @@ void LayerDelete(Layer layer) {
 	free(layer.values);
 }
 
+// realizando o cálculo de um neurônio da camada
+double LayerNeuronPredict(Layer layer, size_t neuronIndex, double *inputs) {
+	double sum = 0;
+
+	for(size_t i = 0; i < layer.inputsLength; i++)
+		sum += layer.weights[neuronIndex][i] * inputs[i];
+
+	return layer.values[neuronIndex] = SIGMOID(sum + layer.bias);
+}
+
 #endif // LAYER_IMPLEMENTATION

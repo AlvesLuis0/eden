@@ -2,7 +2,7 @@
 #include "EDEN/layer.h"
 
 int main() {
-  Layer layer = LayerCreate(1, 2);
+  Layer layer = LayerCreate(2, 2);
 
   LayerPrint(layer);
 
