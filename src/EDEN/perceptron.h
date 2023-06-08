@@ -32,7 +32,7 @@ static inline void PerceptronDelete(Perceptron model);
 // criando perceptron
 Perceptron PerceptronCreate(size_t weightsLength) {
 	Perceptron model = {
-		.weights = malloc(sizeof(double) * weightsLength), // alocando memória necessária para armazenas os pesos
+		.weights = malloc(sizeof(double) * weightsLength), // alocando memória necessária para armazenar os pesos
 		.bias = RAND(1.5),
 		.weightsLength = weightsLength
 	};
@@ -45,7 +45,10 @@ Perceptron PerceptronCreate(size_t weightsLength) {
 
 void __PerceptronPrint(Perceptron model, char *label) {
 	printf("Perceptron %s = {\n", label);
-	printf("\tdouble bias = %lf;\n\tsize_t weightsLength = %ld;\n\tdouble *weights = [\n\t\t", model.bias, model.weightsLength);
+	printf(
+		"\tdouble bias = %lf;\n\tsize_t weightsLength = %ld;\n\tdouble *weights = [\n\t\t",
+		model.bias, model.weightsLength
+	);
 
 	for(size_t i = 0; i < model.weightsLength; i++)
 		printf("%lf ", model.weights[i]);
