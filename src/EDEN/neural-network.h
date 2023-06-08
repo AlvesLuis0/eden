@@ -16,6 +16,7 @@ typedef struct {
 
 NeuralNetwork NeuralNetworkCreate(size_t *topology, size_t topologyLength);
 void __NeuralNetworkPrint(NeuralNetwork neural, char *label);
+double* NeuralNetworkPredict(NeuralNetwork neural, double *inputs);
 void NeuralNetworkDelete(NeuralNetwork neural);
 
 #endif // NEURAL_NETWORK_H_
@@ -46,6 +47,19 @@ void __NeuralNetworkPrint(NeuralNetwork neural, char *label) {
     LayerPrint(neural.layers[i]);
   
   puts("------------------------\n");
+}
+
+// prevendo resultado com base nas entradas
+double* NeuralNetworkPredict(NeuralNetwork neural, double *inputs) {
+  for(size_t i = 0; i < neural.layers[0].neuronsLength; i++)
+    LayerNeuronPredict(neural.layers[0], i, inputs);
+  
+  if(neural.topologyLength > 1)
+    for(size_t i = 1; i < neural.topologyLength; i++)
+      for(size_t j = 0; j < neural.layers[i].neuronsLength; j++)
+        LayerNeuronPredict(neural.layers[i], j, neural.layers[i - 1].values);
+  
+  return neural.layers[neural.topologyLength - 1].values;
 }
 
 // liberando a memória

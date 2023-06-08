@@ -10,8 +10,10 @@
 int main() {
   srand(time(NULL));
   
-  size_t topology[TOPOLOGY_LENGTH] = { 3, 2, 1 };
+  size_t topology[TOPOLOGY_LENGTH] = { 2, 2, 1 };
   NeuralNetwork neural = NeuralNetworkCreate(topology, TOPOLOGY_LENGTH);
+
+  NeuralNetworkPredict(neural, (double[]) { 1, 0 });
 
   NeuralNetworkPrint(neural);
 
