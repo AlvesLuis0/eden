@@ -11,9 +11,10 @@ typedef struct {
 	double *weights;
 } Perceptron;
 
+#define Perceptron(weightsLength) __PerceptronCreate(weightsLength)
 #define PerceptronPrint(model) __PerceptronPrint(model, #model)
 
-Perceptron PerceptronCreate(size_t weightsLength);
+Perceptron __PerceptronCreate(size_t weightsLength);
 void __PerceptronPrint(Perceptron model, char *label);
 double PerceptronPredict(Perceptron model, double *inputs);
 double PerceptronTrain(Perceptron *model, double *inputs, double expects, double learningRate);
@@ -30,7 +31,7 @@ static inline void PerceptronDelete(Perceptron model);
 #include "utils.h"
 
 // criando perceptron
-Perceptron PerceptronCreate(size_t weightsLength) {
+Perceptron __PerceptronCreate(size_t weightsLength) {
 	Perceptron model = {
 		.weights = malloc(sizeof(double) * weightsLength), // alocando memória necessária para armazenas os pesos
 		.bias = RAND(1.5),

@@ -37,7 +37,7 @@ int main() {
 	};
 
 	// declarando perceptron
-	Perceptron model = PerceptronCreate(COLUMNS);
+	Perceptron model = Perceptron(COLUMNS);
 
 	// treinando o perceptron
 	for(size_t i = 0; i < EPOCH; i++) {

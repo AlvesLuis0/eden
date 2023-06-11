@@ -1,13 +1,23 @@
-# EDEN
+ EDEN
 ## Visão Geral
 A biblioteca de Machine Learning Eden é um conjunto de funções e algoritmos implementados em linguagem C,
 desenvolvidos para auxiliar na criação e aplicação de modelos ML. Essa biblioteca oferece uma
 implementações básicas desses algoritmos, permitindo que os usuários criem, treinem e façam predições
-utilizando esse modelos.
+utilizando esses modelos.
 
-## Funcionalidades
-- [x] Perceptron: implementação do algoritmo Perceptron, um modelo de classificação linear usado
-em problemas de aprendizado de máquina binária.
+## Modelos
+### Perceptron
+Modelo mais simples de machine learning, que tem quantas entradas você desejar, porém, só tem como saída
+um único número entre 0 e 1. O cálculo da predição pode ser demonstrado da seguinte forma:\
+$y = g((\sum_{i=1}^{n} w_i x_i) + b)$\
+Onde $g(x) = \frac{i}{1 + e^{-x}}$
+
+#### Simbologia
+* $y$ - Saída do Perceptron
+* $g$ - Função de Ativação - Sigmoide
+* $w_i$ - Pesos das Conexões
+* $x_i$ - Valores de Entrada
+* $b$ - Viés (bias)
 
 ## Requisitos de Sistema
 * Compilador C: um compilador C compatível instalado no sistema.

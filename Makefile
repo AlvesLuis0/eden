@@ -1,5 +1,5 @@
 # variáveis de personalização
-FILENAME=xor-perceptron
+FILENAME=perceptron
 INPUT_DIR=src
 OUTPUT_DIR=build
 LOG_DIR=log
@@ -22,6 +22,11 @@ COMMAND=$(COMPILER) $(INPUT_FILE) -o $(OUTPUT_FILE) $(FLAGS)
 all:
 	clear
 	$(COMMAND)
+
+struct:
+	mkdir $(OUTPUT_DIR)
+	mkdir $(LOG_DIR)
+	mkdir $(PLOT_DIR)
 
 # comando de rodar programa
 run: $(OUTPUT_FILE)
