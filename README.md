@@ -1,4 +1,4 @@
- EDEN
+# EDEN
 ## Visão Geral
 A biblioteca de Machine Learning Eden é um conjunto de funções e algoritmos implementados em linguagem C,
 desenvolvidos para auxiliar na criação e aplicação de modelos ML. Essa biblioteca oferece uma
