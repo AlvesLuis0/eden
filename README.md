@@ -9,7 +9,7 @@ utilizando esses modelos.
 ### Perceptron
 Modelo mais simples de machine learning, que tem quantas entradas você desejar, porém, só tem como saída
 um único número entre 0 e 1. O cálculo da predição pode ser demonstrado da seguinte forma:\
-$y = g((\sum_{i=1}^{n} w_i x_i) + b)$\
+$y = g \left( \left(\sum_{i=1}^{n} w_i x_i \right) + b \right)$\
 Onde $g(x) = \frac{i}{1 + e^{-x}}$
 
 #### Simbologia
